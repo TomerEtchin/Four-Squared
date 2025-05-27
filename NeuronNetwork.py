@@ -12,12 +12,9 @@ import matplotlib.pyplot as plt
 with open('Board-QTable.json', 'r') as f:
     data = json.load(f)
 
-
-
-
 X_list = []
 y_list = []
-char_to_int = {'X': -1, '0': 0, '1' : 1, '2' : 2 }
+char_to_int = {'X': -1, '0': 0, '1': 1, '2': 2}
 
 for key, value in data.items():
     X_list.append([char_to_int[char] for char in key])
@@ -25,11 +22,6 @@ for key, value in data.items():
 
 X = np.array(X_list)
 y = np.array(y_list)
-
-
-
-
-
 
 print("Dataset size:", X.shape, "features,", y.shape, "labels")
 
@@ -40,24 +32,24 @@ print("Train/test split:", X_train.shape, X_test.shape)
 
 # === Build the Keras model ===
 model = Sequential([
-    Dense(64, activation='relu', input_shape=(34,)),  # 34 inputs
-    Dropout(0.2),
+    Dense(128, activation='relu', input_shape=(34,)),  # 34 inputs
+    Dropout(0.3),
+    Dense(64, activation='relu'),
+    Dropout(0.3),
     Dense(32, activation='relu'),
-    Dropout(0.2),
-    Dense(16, activation='relu'),
     Dense(1, activation='sigmoid')  # Output score between 0 and 1
 ])
 
 # Compile the model
-model.compile(optimizer=Adam(),
+model.compile(optimizer=Adam(learning_rate=0.0005),
               loss='mean_squared_error',
               metrics=['mae'])
 
 # Train the model
 history = model.fit(X_train, y_train,
                     validation_split=0.2,
-                    epochs=20,
-                    batch_size=32,
+                    epochs=40,
+                    batch_size=64,
                     verbose=1)
 
 # Evaluate the model

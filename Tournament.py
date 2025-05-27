@@ -78,11 +78,11 @@ class Tournament:
 
 
 if __name__ == "__main__":
-    # Player types: 1=Human, 2=Random, 3=Smart
+    # Player types: 1=Human, 2=Random, 3=Smart, 4 = AI
     tournament = Tournament(
-        player1_type=3,  # SmartAgent for player 1 (Blue)
+        player1_type=4,  # SmartAgent for player 1 (Blue)
         player2_type=2,  # Random for player 2 (Red)
-        num_games = 10000,
+        num_games = 100,
         gamma=0.9,
         json_file_name="Board-QTable.json"
     )

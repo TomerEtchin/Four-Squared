@@ -81,8 +81,8 @@ class AiAgent(Player):
             input_array = np.array([self.encode_board(board_copy)], dtype=float)
             try:
                 pred = self.model.predict(input_array, verbose=0)
-                print(
-                    f"DEBUG: prediction raw output: {pred}, shape: {getattr(pred, 'shape', type(pred))}")  # Print prediction for debugging
+                #print(
+                  # f"DEBUG: prediction raw output: {pred}, shape: {getattr(pred, 'shape', type(pred))}")  # Print prediction for debugging
                 score = float(np.array(pred).flatten()[0])  # Guaranteed to work for any shape
             except Exception as e:
                 print(f"Model prediction error: {e}")
@@ -93,9 +93,9 @@ class AiAgent(Player):
                 best_move = move
 
         if best_move is not None:
-            print("DEBUG: AiAgent returning move:", best_move)
+            #print("DEBUG: AiAgent returning move:", best_move)
             return best_move
 
-        print("DEBUG: AiAgent could not generate a valid move!")
+        #print("DEBUG: AiAgent could not generate a valid move!")
         # Fallback: choose any legal move if available, or pass
         return possible_moves[0] if possible_moves else (None, None, None)
